@@ -68,7 +68,7 @@ export function loadConfig(): ExtractorConfig {
     requestDelayMs: parseInt(process.env.REQUEST_DELAY_MS, 1000),
 
     // Filtering configuration
-    minSalePrice: parseInt(process.env.MIN_SALE_PRICE, 1000),
+    minSalePrice: parseInt(process.env.MIN_SALE_PRICE, 100000),
     instrumentDenylist: parseList(
       process.env.INSTRUMENT_DENYLIST,
       DEFAULT_INSTRUMENT_DENYLIST

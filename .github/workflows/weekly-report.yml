@@ -59,7 +59,7 @@ jobs:
           COUNTY_NAME: 'Tipton'
           
           # Filtering
-          MIN_SALE_PRICE: '1000'
+          MIN_SALE_PRICE: '100000'
           
           # Email configuration (from secrets)
           SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
