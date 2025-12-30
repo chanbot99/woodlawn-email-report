@@ -274,8 +274,11 @@ export async function sendReportEmail(
   const dateLabel = dateRange.label.replace('Week of ', '').replace(/-/g, '_');
   const attachmentFilename = `new_homeowners_${config.countyName.toLowerCase()}_${dateLabel}.csv`;
 
+  // Support multiple recipients (comma-separated in EMAIL_TO)
+  const recipients = config.emailTo.split(',').map(email => email.trim()).filter(Boolean);
+
   const msg = {
-    to: config.emailTo,
+    to: recipients,
     from: config.emailFrom,
     subject: `Woodlawn New Homeowners Report - ${config.countyName} County - ${dateRange.label}`,
     text: textContent,
