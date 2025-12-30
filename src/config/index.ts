@@ -89,7 +89,7 @@ export function loadConfig(): ExtractorConfig {
 
     // Google Maps configuration (optional - for property images in email)
     googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY || '',
-    mapImageType: (process.env.MAP_IMAGE_TYPE || 'satellite') as 'streetview' | 'satellite',
+    mapImageType: (process.env.MAP_IMAGE_TYPE || 'streetview') as 'streetview' | 'satellite',
     mapImageWidth: parseInt(process.env.MAP_IMAGE_WIDTH, 600),  // 2x for retina displays
     mapImageHeight: parseInt(process.env.MAP_IMAGE_HEIGHT, 300),
   };

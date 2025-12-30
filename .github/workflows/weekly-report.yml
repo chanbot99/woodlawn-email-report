@@ -68,7 +68,7 @@ jobs:
           
           # Google Maps (for property images)
           GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
-          MAP_IMAGE_TYPE: 'satellite'
+          MAP_IMAGE_TYPE: 'streetview'
           
           # Optional S3 (from secrets)
           S3_BUCKET: ${{ secrets.S3_BUCKET }}

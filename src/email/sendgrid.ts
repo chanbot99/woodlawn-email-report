@@ -86,13 +86,13 @@ export function generateEmailHtml(
   if (hasImages && config) {
     // Card layout with images
     const propertyCards = sales
-      .slice(0, 20) // Limit to 20 with images to avoid huge email
+      .slice(0, 50) // Show up to 50 properties with images
       .map((sale, index) => generatePropertyCard(sale, config, index))
       .join('');
     
     propertiesHtml = `
       <div style="padding: 15px 20px; border-bottom: 1px solid #e5e7eb;">
-        <h2 style="margin: 0; font-size: 18px; color: #1f2937;">Properties${sales.length > 20 ? ` (showing 20 of ${sales.length})` : ''}</h2>
+        <h2 style="margin: 0; font-size: 18px; color: #1f2937;">Properties${sales.length > 50 ? ` (showing 50 of ${sales.length})` : ''}</h2>
         <p style="margin: 5px 0 0 0; font-size: 13px; color: #6b7280;">Click images to open in Google Maps</p>
       </div>
       <div style="padding: 16px;">
@@ -137,9 +137,7 @@ export function generateEmailHtml(
     `;
   }
 
-  const limitNote = hasImages && sales.length > 20
-    ? `<p style="margin-top: 15px; color: #6b7280; font-size: 14px; text-align: center;">📎 Full list of ${sales.length} properties attached as CSV</p>`
-    : sales.length > 50
+  const limitNote = sales.length > 50
     ? `<p style="margin-top: 15px; color: #6b7280; font-size: 14px; text-align: center;">📎 Full list of ${sales.length} properties attached as CSV</p>`
     : '';
 
