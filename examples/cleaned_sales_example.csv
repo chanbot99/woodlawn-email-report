@@ -1,0 +1,7 @@
+parcel_id,situs_address,city,state,zip,owner_name,owner_mailing_address,sale_date,sale_price,deed_instrument,land_use,source_url,extracted_at
+084-123-45.00,123 MAIN ST,COVINGTON,TN,38019,"SMITH, JOHN & JANE",,2025-01-08,250000,Warranty Deed,Residential,https://www.assessment.cot.tn.gov/RE_Assessment/ParcelDetails.aspx?id=084-123-45.00,2025-01-13T12:00:00.000Z
+084-234-56.00,456 OAK AVE,BRIGHTON,TN,38011,"JOHNSON, ROBERT",,2025-01-07,175000,Warranty Deed,Residential,https://www.assessment.cot.tn.gov/RE_Assessment/ParcelDetails.aspx?id=084-234-56.00,2025-01-13T12:00:00.000Z
+084-345-67.00,789 PINE DR,MUNFORD,TN,38058,"WILLIAMS, SARAH",,2025-01-09,320000,Warranty Deed,Residential,https://www.assessment.cot.tn.gov/RE_Assessment/ParcelDetails.aspx?id=084-345-67.00,2025-01-13T12:00:00.000Z
+084-456-78.00,321 ELM ST,ATOKA,TN,38004,"BROWN, MICHAEL & LISA",,2025-01-10,180000,Special Warranty Deed,Residential,https://www.assessment.cot.tn.gov/RE_Assessment/ParcelDetails.aspx?id=084-456-78.00,2025-01-13T12:00:00.000Z
+084-567-89.00,555 MAPLE LN,COVINGTON,TN,38019,"DAVIS, AMANDA",,2025-01-11,350000,Warranty Deed,Residential,https://www.assessment.cot.tn.gov/RE_Assessment/ParcelDetails.aspx?id=084-567-89.00,2025-01-13T12:00:00.000Z
+

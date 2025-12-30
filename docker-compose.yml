@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  newhomeowners:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: newhomeowners
+    environment:
+      # Core configuration
+      - HEADLESS=true
+      - OUT_DIR=/app/data
+      - CONCURRENCY=3
+      - REQUEST_DELAY_MS=1000
+      
+      # County configuration
+      - COUNTY_CODE=084
+      - COUNTY_NAME=Tipton
+      
+      # Filtering
+      - MIN_SALE_PRICE=1000
+      - INSTRUMENT_DENYLIST=Quitclaim,Deed of Trust,Release,Correction,Trustee,Executor,Sheriff
+      
+      # Email configuration (set via .env file or override)
+      - SENDGRID_API_KEY=${SENDGRID_API_KEY:-}
+      - EMAIL_TO=${EMAIL_TO:-}
+      - EMAIL_FROM=${EMAIL_FROM:-noreply@example.com}
+      
+      # Optional S3 configuration
+      - S3_BUCKET=${S3_BUCKET:-}
+      - AWS_REGION=${AWS_REGION:-us-east-1}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID:-}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY:-}
+    volumes:
+      # Mount output directory to persist data
+      - ./data:/app/data
+    # Default: run extraction for previous week
+    command: ["--out", "/app/data"]
+    # Uncomment to run with specific week
+    # command: ["--week", "2025-01-06", "--out", "/app/data"]
+    
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+
+  # Development service with hot reload
+  newhomeowners-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: newhomeowners-dev
+    environment:
+      - HEADLESS=false
+      - OUT_DIR=/app/data
+    volumes:
+      - ./src:/app/src
+      - ./data:/app/data
+    command: ["npm", "run", "dev", "--", "--dry-run"]
+    profiles:
+      - dev
+

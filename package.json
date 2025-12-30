@@ -1,0 +1,53 @@
+{
+  "name": "newhomeowners",
+  "version": "1.0.0",
+  "description": "New Homeowners Extractor for Tipton County, TN - Extracts weekly residential property sales from TPAD",
+  "main": "dist/index.js",
+  "bin": {
+    "newhomeowners": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "extract": "node dist/index.js",
+    "extract:dry": "node dist/index.js --dry-run",
+    "dev": "tsx src/index.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src --ext .ts",
+    "clean": "rimraf dist",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "real-estate",
+    "property-sales",
+    "tipton-county",
+    "tennessee",
+    "web-scraping",
+    "playwright"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "@sendgrid/mail": "^8.1.0",
+    "@aws-sdk/client-s3": "^3.490.0",
+    "commander": "^12.0.0",
+    "csv-parse": "^5.5.3",
+    "csv-stringify": "^6.4.5",
+    "dotenv": "^16.3.1",
+    "p-limit": "^5.0.0",
+    "playwright": "^1.41.0",
+    "winston": "^3.11.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "rimraf": "^5.0.5",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.0"
+  }
+}
+

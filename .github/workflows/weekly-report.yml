@@ -1,0 +1,143 @@
+name: Weekly New Homeowners Report
+
+on:
+  # Run every Monday at 6:00 AM America/Chicago (12:00 PM UTC in winter, 11:00 AM UTC in summer)
+  schedule:
+    - cron: '0 12 * * 1'  # 12:00 PM UTC = 6:00 AM CST (adjust for daylight saving)
+  
+  # Allow manual trigger
+  workflow_dispatch:
+    inputs:
+      week:
+        description: 'Specific week to process (Monday date in YYYY-MM-DD format)'
+        required: false
+        type: string
+      dry_run:
+        description: 'Dry run (skip email)'
+        required: false
+        type: boolean
+        default: false
+
+env:
+  NODE_VERSION: '20'
+
+jobs:
+  extract-and-report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install chromium --with-deps
+
+      - name: Build TypeScript
+        run: npm run build
+
+      - name: Run extraction
+        id: extract
+        env:
+          # Core configuration
+          HEADLESS: 'true'
+          OUT_DIR: './data'
+          CONCURRENCY: '3'
+          REQUEST_DELAY_MS: '1500'
+          
+          # County configuration
+          COUNTY_CODE: '084'
+          COUNTY_NAME: 'Tipton'
+          
+          # Filtering
+          MIN_SALE_PRICE: '1000'
+          
+          # Email configuration (from secrets)
+          SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          
+          # Google Maps (for property images)
+          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+          MAP_IMAGE_TYPE: 'satellite'
+          
+          # Optional S3 (from secrets)
+          S3_BUCKET: ${{ secrets.S3_BUCKET }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          # Build command arguments
+          ARGS="--out ./data"
+          
+          # Add week if specified
+          if [ -n "${{ github.event.inputs.week }}" ]; then
+            ARGS="$ARGS --week ${{ github.event.inputs.week }}"
+          fi
+          
+          # Add dry-run if specified
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            ARGS="$ARGS --dry-run"
+          fi
+          
+          echo "Running: node dist/index.js $ARGS"
+          node dist/index.js $ARGS
+          
+          # Set output for artifact naming
+          echo "date=$(date +%Y-%m-%d)" >> $GITHUB_OUTPUT
+
+      - name: Upload output artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: newhomeowners-report-${{ steps.extract.outputs.date }}
+          path: ./data/
+          retention-days: 90
+          if-no-files-found: warn
+
+      - name: Summary
+        run: |
+          echo "## Extraction Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ -d "./data" ]; then
+            echo "### Output Files" >> $GITHUB_STEP_SUMMARY
+            ls -la ./data/ >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            
+            # Count records if cleaned CSV exists
+            for f in ./data/cleaned_sales_*.csv; do
+              if [ -f "$f" ]; then
+                RECORDS=$(($(wc -l < "$f") - 1))
+                echo "**Records extracted:** $RECORDS" >> $GITHUB_STEP_SUMMARY
+              fi
+            done
+          else
+            echo "No output files generated" >> $GITHUB_STEP_SUMMARY
+          fi
+
+  # Optional: Run tests before extraction
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run tests
+        run: npm test
+

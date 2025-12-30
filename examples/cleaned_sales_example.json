@@ -1,0 +1,97 @@
+{
+  "metadata": {
+    "generated_at": "2025-01-13T12:00:00.000Z",
+    "date_range": {
+      "start": "2025-01-06",
+      "end": "2025-01-12",
+      "label": "Week of 2025-01-06"
+    },
+    "county": "Tipton",
+    "record_count": 5,
+    "stats": {
+      "total_value": 1275000,
+      "average_price": 255000,
+      "median_price": 250000,
+      "min_price": 175000,
+      "max_price": 350000
+    }
+  },
+  "records": [
+    {
+      "parcel_id": "084-123-45.00",
+      "situs_address": "123 MAIN ST",
+      "city": "COVINGTON",
+      "state": "TN",
+      "zip": "38019",
+      "owner_name": "SMITH, JOHN & JANE",
+      "owner_mailing_address": null,
+      "sale_date": "2025-01-08",
+      "sale_price": 250000,
+      "deed_instrument": "Warranty Deed",
+      "land_use": "Residential",
+      "source_url": "https://www.assessment.cot.tn.gov/RE_Assessment/ParcelDetails.aspx?id=084-123-45.00",
+      "extracted_at": "2025-01-13T12:00:00.000Z"
+    },
+    {
+      "parcel_id": "084-234-56.00",
+      "situs_address": "456 OAK AVE",
+      "city": "BRIGHTON",
+      "state": "TN",
+      "zip": "38011",
+      "owner_name": "JOHNSON, ROBERT",
+      "owner_mailing_address": null,
+      "sale_date": "2025-01-07",
+      "sale_price": 175000,
+      "deed_instrument": "Warranty Deed",
+      "land_use": "Residential",
+      "source_url": "https://www.assessment.cot.tn.gov/RE_Assessment/ParcelDetails.aspx?id=084-234-56.00",
+      "extracted_at": "2025-01-13T12:00:00.000Z"
+    },
+    {
+      "parcel_id": "084-345-67.00",
+      "situs_address": "789 PINE DR",
+      "city": "MUNFORD",
+      "state": "TN",
+      "zip": "38058",
+      "owner_name": "WILLIAMS, SARAH",
+      "owner_mailing_address": null,
+      "sale_date": "2025-01-09",
+      "sale_price": 320000,
+      "deed_instrument": "Warranty Deed",
+      "land_use": "Residential",
+      "source_url": "https://www.assessment.cot.tn.gov/RE_Assessment/ParcelDetails.aspx?id=084-345-67.00",
+      "extracted_at": "2025-01-13T12:00:00.000Z"
+    },
+    {
+      "parcel_id": "084-456-78.00",
+      "situs_address": "321 ELM ST",
+      "city": "ATOKA",
+      "state": "TN",
+      "zip": "38004",
+      "owner_name": "BROWN, MICHAEL & LISA",
+      "owner_mailing_address": null,
+      "sale_date": "2025-01-10",
+      "sale_price": 180000,
+      "deed_instrument": "Special Warranty Deed",
+      "land_use": "Residential",
+      "source_url": "https://www.assessment.cot.tn.gov/RE_Assessment/ParcelDetails.aspx?id=084-456-78.00",
+      "extracted_at": "2025-01-13T12:00:00.000Z"
+    },
+    {
+      "parcel_id": "084-567-89.00",
+      "situs_address": "555 MAPLE LN",
+      "city": "COVINGTON",
+      "state": "TN",
+      "zip": "38019",
+      "owner_name": "DAVIS, AMANDA",
+      "owner_mailing_address": null,
+      "sale_date": "2025-01-11",
+      "sale_price": 350000,
+      "deed_instrument": "Warranty Deed",
+      "land_use": "Residential",
+      "source_url": "https://www.assessment.cot.tn.gov/RE_Assessment/ParcelDetails.aspx?id=084-567-89.00",
+      "extracted_at": "2025-01-13T12:00:00.000Z"
+    }
+  ]
+}
+
